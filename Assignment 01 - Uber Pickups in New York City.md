@@ -12,8 +12,10 @@
 
 * **Dataset Source:** [Kaggle: Uber Pickups in New York City](https://www.kaggle.com/datasets/fivethirtyeight/uber-pickups-in-new-york-city)
 * **Target Files:** `uber-raw-data-apr14.csv` through `uber-raw-data-sep14.csv` (The monthly raw pickup files).
-* **Documentation/Tools:** * **Folium:** A powerful Python library for visualizing geospatial data.
-* [Folium Documentation](https://python-visualization.github.io/folium/)
+* **Documentation/Tools:**
+* **Pandas Visualization:** Using the built-in `.plot()` methods for quick insights.
+* **Matplotlib/Seaborn:** For static geospatial plotting (scatter/hexbin plots).
+* [Pandas Visualization Docs](https://pandas.pydata.org/pandas-docs/stable/user_guide/visualization.html)
 
 
 
@@ -46,12 +48,12 @@
 
 ### Phase 4: Advanced Analysis (The "Why" - Correlations & Patterns)
 
-* **Task 4.1 (Geospatial Analysis):** Generate an interactive Heatmap using Folium (or Plotly) plotted on a map of NYC.
-* *Goal:* Visually confirm if demand is centralized in Manhattan or dispersed across boroughs like Brooklyn and Queens.
+* **Task 4.1 (Geospatial Analysis):** Generate a **Scatter Plot** or **Hexbin Plot** using Pandas/Matplotlib with Longitude on the x-axis and Latitude on the y-axis.
+* *Goal:* Visually recreate the map of NYC using only the density of data points to confirm if demand is centralized or dispersed. Use transparency (alpha) to reveal density.
 
 
 * **Task 4.2 (Clustering/Segmentation):** Use **K-Means Clustering** based on Longitude and Latitude to create distinct "Demand Zones."
-* *Goal:* Instead of infinite coordinates, group the city into 5-10 logical operating clusters to simplify driver assignment instructions.
+* *Goal:* Instead of infinite coordinates, group the city into 5-10 logical operating clusters. Visualize these clusters by coloring your scatter plot by `Cluster_ID`.
 
 
 
@@ -70,6 +72,9 @@ Your final Jupyter Notebook must contain:
 
 ## 💡 Pro-Tips & Suggestions
 
-* **Performance:** This dataset contains millions of rows. If your visualizations are slow, consider down-sampling your data (e.g., taking a random 10% sample) for the development of your Heatmaps, then run the full set for the final export.
-* **Aesthetics:** Use a dark theme (like `plotly_dark` or `folium.Map(tiles='CartoDB dark_matter')`) for maps; it makes the data points/heatmaps pop significantly more than standard light maps.
+* **Performance & "Overplotting":** When plotting millions of points on a standard scatter plot, they will overlap and form a solid block of color.
+* *Tip:* Use the `alpha` parameter (e.g., `alpha=0.05`) to add transparency. This allows you to see "hotspots" where the points pile up darker. Alternatively, use a Hexbin plot (`kind='hexbin'`) which is optimized for density visualization.
+
+
+* **Aesthetics:** Use a dark style (e.g., `plt.style.use('dark_background')`); it makes high-density scatter plots and "glowing" dots stand out significantly more than white backgrounds.
 * **The "Analyst Mindset":** Remember, a car cannot be everywhere at once. Your goal is not just to show *where* cars are needed, but *when* they are needed there. The interaction between Time and Location is where the value lies.
